@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/bullets_point.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/lucky_draw_form.dart';
+import 'package:haier_modules/view/haier_mall_lucky_draw/term_of_service_dialogbox.dart';
 
 void main() {
   runApp(const LuckyDrawScreen());
@@ -31,7 +32,7 @@ class _LuckyDrawScreenState extends State<LuckyDrawScreen> {
                 width: double.infinity,
                 child: Stack(
                   children: [
-                    Image.asset('assets/dailyCheckIn/lucky_draw.png'),
+                    Image.asset('assets/luckyDraw/lucky_draw.png'),
                     Positioned(
                       bottom: 15,
                       left: 15,
@@ -148,7 +149,10 @@ class _LuckyDrawScreenState extends State<LuckyDrawScreen> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            TermOfServiceDialogBox.termOfServiceDialogBox(
+                                context);
+                          },
                           child: const Text(
                             'Terms of Services',
                             style: TextStyle(

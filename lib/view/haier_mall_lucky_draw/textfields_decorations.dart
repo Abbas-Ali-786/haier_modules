@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class TextfieldsDecorations extends StatefulWidget {
   String text;
-  TextfieldsDecorations({super.key, required this.text});
+  TextInputType? textInputType;
+  TextfieldsDecorations({super.key, required this.text, this.textInputType});
 
   @override
   State<TextfieldsDecorations> createState() => _TextfieldsDecorationsState();
@@ -13,6 +14,7 @@ class _TextfieldsDecorationsState extends State<TextfieldsDecorations> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: widget.textInputType ?? TextInputType.text,
       decoration: InputDecoration(
         labelText: widget.text,
         labelStyle: const TextStyle(

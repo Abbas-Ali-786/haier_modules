@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class BulletPoint extends StatelessWidget {
   final String text;
+  final TextStyle? textStyle;
 
-  const BulletPoint(this.text, {Key? key}) : super(key: key);
+  const BulletPoint(this.text, {Key? key, this.textStyle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +16,14 @@ class BulletPoint extends StatelessWidget {
           const Text(
             '•  ',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(fontSize: 14),
+              style: textStyle ?? TextStyle(fontSize: 14, color: Colors.black),
             ),
           ),
         ],

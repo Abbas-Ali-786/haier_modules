@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/show_calender.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/textfields_decorations.dart';
+import 'package:haier_modules/view/haier_mall_lucky_draw/warrenty_card.dart';
 
 class LuckyDrawForm extends StatefulWidget {
   const LuckyDrawForm({super.key});
@@ -10,6 +13,33 @@ class LuckyDrawForm extends StatefulWidget {
 }
 
 class _LuckyDrawFormState extends State<LuckyDrawForm> {
+  Timer? _timer;
+  int _remainingSeconds = 0;
+  bool _showResend = false;
+
+  void startTimer() {
+    _remainingSeconds = 30;
+    _showResend = false;
+    _timer?.cancel();
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingSeconds > 0) {
+          _remainingSeconds--;
+        } else {
+          _timer?.cancel();
+          _showResend = true;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +48,7 @@ class _LuckyDrawFormState extends State<LuckyDrawForm> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 2,
+        spacing: 5,
         children: [
           const Text('Name'),
           TextfieldsDecorations(text: 'Enter Name'),
@@ -50,7 +80,10 @@ class _LuckyDrawFormState extends State<LuckyDrawForm> {
           Row(
             children: [
               Expanded(
-                child: TextfieldsDecorations(text: 'Enter Verification Code'),
+                child: TextfieldsDecorations(
+                  text: 'Enter Verification Code',
+                  textInputType: TextInputType.phone,
+                ),
               ),
               const SizedBox(width: 10),
               ElevatedButton(
@@ -66,14 +99,50 @@ class _LuckyDrawFormState extends State<LuckyDrawForm> {
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
                 ),
-                onPressed: () {},
-                child: const Text(
-                  'Get Code',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                onPressed: () {
+                  startTimer();
+                },
+                child: Text(
+                  _remainingSeconds > 0 ? '${_remainingSeconds}s' : 'Get Code',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
             ],
           ),
+          if (_showResend)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: TextButton(
+                onPressed: () {
+                  startTimer();
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(color: Colors.black),
+                    children: [
+                      TextSpan(
+                        text: 'Didn,t receive code? ',
+                        style: TextStyle(color: Color(0XFF606266)),
+                      ),
+                      TextSpan(
+                        text: 'Resend',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Color(0xFF0159A1),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           const SizedBox(height: 3),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.03,
@@ -88,7 +157,9 @@ class _LuckyDrawFormState extends State<LuckyDrawForm> {
                     color: Color(0XFF8A8B8E),
                     size: 20,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    WarrentyCard.showWarrentyCard(context);
+                  },
                 ),
               ],
             ),
