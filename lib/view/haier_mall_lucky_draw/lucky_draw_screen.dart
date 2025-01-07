@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/bullets_point.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/lucky_draw_form.dart';
+import 'package:haier_modules/view/haier_mall_lucky_draw/participated_screen.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/term_of_service_dialogbox.dart';
 
 void main() {
@@ -172,7 +173,14 @@ class _LuckyDrawScreenState extends State<LuckyDrawScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             )),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ParticipatedScreen(),
+                            ),
+                          );
+                        },
                         child: const Text(
                           'Join Now',
                           style: TextStyle(color: Colors.white),

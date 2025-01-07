@@ -16,6 +16,8 @@ dependencies:
   printing: ^5.13.4
   path_provider: ^2.1.5
   intl: ^0.20.1
+  chewie: ^1.9.0
+  video_player: ^2.9.2
 
 dev_dependencies:
   flutter_test:
