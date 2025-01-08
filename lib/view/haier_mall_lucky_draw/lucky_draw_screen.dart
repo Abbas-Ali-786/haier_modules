@@ -4,10 +4,6 @@ import 'package:haier_modules/view/haier_mall_lucky_draw/lucky_draw_form.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/participated_screen.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/term_of_service_dialogbox.dart';
 
-void main() {
-  runApp(const LuckyDrawScreen());
-}
-
 class LuckyDrawScreen extends StatefulWidget {
   const LuckyDrawScreen({Key? key}) : super(key: key);
 
