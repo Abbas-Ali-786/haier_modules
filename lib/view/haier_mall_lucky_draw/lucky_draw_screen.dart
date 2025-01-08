@@ -29,11 +29,22 @@ class _LuckyDrawScreenState extends State<LuckyDrawScreen> {
                 width: double.infinity,
                 child: Stack(
                   children: [
-                    Image.asset('assets/luckyDraw/lucky_draw.png'),
+                    Image.asset(
+                      'assets/luckyDraw/lucky_draw.png',
+                      height: MediaQuery.of(context).size.width < 600
+                          ? MediaQuery.of(context).size.height * 0.2
+                          : MediaQuery.of(context).size.height * 0.6,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fill,
+                    ),
                     Positioned(
-                      bottom: 15,
-                      left: 15,
+                      bottom: MediaQuery.of(context).size.width * 0.04,
+                      left: MediaQuery.of(context).size.width * 0.05,
                       child: Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width > 600
+                            ? MediaQuery.of(context).size.height * 0.06
+                            : MediaQuery.of(context).size.height * 0.04,
                         decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(12),
@@ -44,8 +55,11 @@ class _LuckyDrawScreenState extends State<LuckyDrawScreen> {
                             },
                             child: Text(
                               'Winner’s History',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.025,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.white),
                             )),
@@ -96,28 +110,24 @@ class _LuckyDrawScreenState extends State<LuckyDrawScreen> {
                     // Hardcoded Text with Points
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          const Text(
-                            'Simply join the campaign by providing details below. Make sure your info is correct to claim the final reward!',
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                BulletPoint(
-                                    'Any customer who purchases a Haier product in 2025 is eligible to participate in lucky draw.'),
-                                BulletPoint(
-                                    'Customers can submit multiple entries, with each entry linked to a unique product serial number.'),
-                                BulletPoint(
-                                    'A live lucky draw will be conducted weekly, selecting winners from the past seven days.'),
-                                BulletPoint(
-                                    'Seven winners will be chosen each week, one from each day, based on unique numbers through a random lucky draw process.'),
-                              ],
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Simply join the campaign by providing details below. Make sure your info is correct to claim the final reward!',
                             ),
-                          )
-                        ],
+                            BulletPoint(
+                                'Any customer who purchases a Haier product in 2025 is eligible to participate in lucky draw.'),
+                            BulletPoint(
+                                'Customers can submit multiple entries, with each entry linked to a unique product serial number.'),
+                            BulletPoint(
+                                'A live lucky draw will be conducted weekly, selecting winners from the past seven days.'),
+                            BulletPoint(
+                                'Seven winners will be chosen each week, one from each day, based on unique numbers through a random lucky draw process.'),
+                          ],
+                        ),
                       ),
                     ),
 

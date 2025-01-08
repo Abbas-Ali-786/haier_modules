@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haier_modules/view/haier_mall_lucky_draw/last_screens.dart';
+import 'package:haier_modules/view/haier_mall_lucky_draw/lucky_draw_screen.dart';
 import 'package:haier_modules/view/haier_mall_lucky_draw/winner_screen.dart';
 
 void main() {
@@ -12,7 +14,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WinnerScreen(),
+      home: LuckyDrawScreen(),
     );
   }
 }
